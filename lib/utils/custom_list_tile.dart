@@ -47,7 +47,7 @@ class CustomListTile extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }
