@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:daily_quote/utils/quote_list_widget.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData leadingIcon;
@@ -21,14 +23,14 @@ class CustomListTile extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(2, 3),
-              ),
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.grey.withOpacity(0.5),
+            //     spreadRadius: 2,
+            //     blurRadius: 5,
+            //     offset: Offset(2, 3),
+            //   ),
+            // ],
             color: Colors.white,
           ),
           child: ListTile(
@@ -45,6 +47,14 @@ class CustomListTile extends StatelessWidget {
               Icons.arrow_outward_rounded,
               color: Colors.grey[500],
             ),
+            // onTap: () {
+            //   // Share.share(
+            //   //   'cobain deh, www.instagram.com',
+            //   //   subject: 'Daily Quote',
+            //   // );
+
+            //   // SharePlus.instance.share(ShareParams(text: 'p'));
+            // },
           ),
         ),
         const SizedBox(height: 16),

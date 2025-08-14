@@ -1,6 +1,5 @@
 import 'package:daily_quote/models/quote.dart';
 import 'package:daily_quote/services/quote_service.dart';
-import 'package:daily_quote/utils/custom_list_tile.dart';
 import 'package:daily_quote/utils/quote_list_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -68,42 +67,15 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 8),
-
-                      //ListTIle Quote
-                      // Expanded(
-                      //   child: FutureBuilder<List<QuoteService>>(
-                      //     future: fetchMultipleQuotes(5),
-                      //     builder: (context, snapshot) {
-                      //       if (snapshot.connectionState ==
-                      //           ConnectionState.waiting) {
-                      //         return const Center(
-                      //           child: CircularProgressIndicator(),
-                      //         );
-                      //       } else if (snapshot.hasError) {
-                      //         return Center(
-                      //           child: Text('Error: ${snapshot.error}'),
-                      //         );
-                      //       } else if (snapshot.hasData) {
-                      //         return QuoteListWidget(quotes: snapshot.data!);
-                      //       } else {
-                      //         return const Center(child: Text('No quotes found'));
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
-                      // CustomListTile(
-                      //   leadingIcon: Icons.format_quote_rounded,
-                      //   title: 'Kalau bisa orang lain, kenapa harus saya?',
-                      //   subtitle: '\nAnonim 2124',
-                      //   trailingIcon: Icons.arrow_outward_rounded,
-                      // ),
                     ],
                   ),
                 ),
               ),
+
+              //List quote
               Expanded(
                 child: FutureBuilder<List<Quote>>(
-                  future: fetchMultipleQuotes(10),
+                  future: fetchMultipleQuotes(8),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
@@ -117,9 +89,12 @@ class HomePage extends StatelessWidget {
                   },
                 ),
               ),
-              const Text(
-                'Quotes powered by ZenQuotes.io',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: const Text(
+                  'Quotes powered by ZenQuotes.io',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
               ),
             ],
           ),

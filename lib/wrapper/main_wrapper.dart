@@ -29,19 +29,19 @@ class _MainWrapperState extends State<MainWrapper> {
         height: double.infinity,
         child: widget.navigationShell,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   SnackBar(
-          //     content: Text("Fitur ini belum tersedia"),
-          //     action: SnackBarAction(label: 'Tutup', onPressed: () {}),
-          //   ),
-          // );
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // ScaffoldMessenger.of(context).showSnackBar(
+      //     //   SnackBar(
+      //     //     content: Text("Fitur ini belum tersedia"),
+      //     //     action: SnackBarAction(label: 'Tutup', onPressed: () {}),
+      //     //   ),
+      //     // );
           
-        },
-        backgroundColor: Color(0xFF113F67),
-        child: const Icon(Icons.dark_mode, color: Colors.white),
-      ),
+      //   },
+      //   backgroundColor: Color(0xFF113F67),
+      //   child: const Icon(Icons.dark_mode, color: Colors.white),
+      // ),
       bottomNavigationBar: SlidingClippedNavBar(
         backgroundColor: Colors.white,
         onButtonPressed: (index) {
