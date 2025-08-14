@@ -1,5 +1,5 @@
 import 'dart:ffi';
-
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:daily_quote/home/home_view.dart';
 import 'package:daily_quote/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -57,47 +57,83 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _email,
-                  decoration: const InputDecoration(labelText: 'Email'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (v) {
-                    if (v == null || v.trim().isEmpty)
-                      return 'Email wajib diisi';
-                    if (!v.contains('@')) return 'Email tidak valid';
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 12),
-                TextFormField(
-                  controller: _password,
-                  decoration: const InputDecoration(labelText: 'Password'),
-                  obscureText: true,
-                  validator: (v) {
-                    if (v == null || v.trim().isEmpty)
-                      return 'Password wajib diisi';
-                    if (v.length < 6) return 'Password minimal 6 karakter';
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _loading ? null : _handleLogin,
-                    child:
-                        _loading
-                            ? const CircularProgressIndicator()
-                            : const Text('Login'),
+        backgroundColor: Color(0xFFFEEBF6),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 150,
+                    width: 150,
+                    child: Image.asset('assets/logo 960 frame.png'),
                   ),
-                ),
-              ],
+                  TextFormField(
+                    controller: _email,
+                    decoration: const InputDecoration(labelText: 'Email'),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (valid) {
+                      if (valid == null || valid.trim().isEmpty)
+                        return 'Email wajib diisi';
+                      if (!valid.contains('@')) return 'Email tidak valid';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    controller: _password,
+                    decoration: const InputDecoration(labelText: 'Password'),
+                    obscureText: true,
+                    validator: (valid) {
+                      if (valid == null || valid.trim().isEmpty)
+                        return 'Password wajib diisi';
+                      if (valid.length < 6)
+                        return 'Password minimal 6 karakter';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF687FE5),
+                      ),
+                      onPressed:
+                          _loading
+                              ? null
+                              : () {
+                                AwesomeDialog(
+                                  context: context,
+                                  customHeader: Icon(
+                                    Icons.check_circle_outline_rounded,
+                                    color: Colors.greenAccent,
+                                    size: 55,
+                                  ),
+                                  dialogType: DialogType.success,
+                                  animType: AnimType.bottomSlide,
+                                  title: 'Login Sukses',
+                                  autoHide: Duration(milliseconds: 1000),
+                                ).show();
+                              },
+                      child:
+                          _loading
+                              ? const CircularProgressIndicator()
+                              : const Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 16,
+                                ),
+                              ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

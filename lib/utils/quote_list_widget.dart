@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'package:daily_quote/models/quote.dart';
 import 'package:flutter/material.dart';

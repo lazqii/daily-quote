@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:daily_quote/utils/quote_list_widget.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData leadingIcon;

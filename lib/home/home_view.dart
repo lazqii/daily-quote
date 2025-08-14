@@ -1,10 +1,44 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:daily_quote/login/login_page.dart';
 import 'package:daily_quote/models/quote.dart';
 import 'package:daily_quote/services/quote_service.dart';
 import 'package:daily_quote/utils/quote_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String? _email;
+
+  @override
+  void initInstate() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final preference = await SharedPreferences.getInstance();
+    setState(() => _email = preference.getString('email'));
+  }
+
+  Future<void> _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('is_logged_in');
+    await prefs.remove('email'); // hapus yang perlu saja
+
+    if (!mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginPage()),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +63,9 @@ class HomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Halo, User!",
+                                'Selamat datang${_email != null ? ', $_email' : ''}!',
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 24,
                                   color: Color(0xFF687FE5),
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -39,7 +73,7 @@ class HomePage extends StatelessWidget {
                               Text(
                                 "Bagaimana kabarmu?",
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 20,
                                   color: Color(0xFF687FE5),
                                 ),
                               ),
@@ -50,10 +84,30 @@ class HomePage extends StatelessWidget {
                               color: Color.fromARGB(255, 139, 157, 240),
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            padding: EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.notifications,
+                            // padding: EdgeInsets.all(4),
+                            child: IconButton(
+                              onPressed: () {
+                                AwesomeDialog(
+                                  context: context,
+                                  customHeader: Icon(
+                                    Icons.warning_amber_rounded,
+                                    color: Colors.amber,
+                                    size: 55,
+                                  ),
+                                  dialogType: DialogType.warning,
+                                  animType: AnimType.bottomSlide,
+                                  title: 'TUNGGUU!!!',
+                                  desc: 'Kamu yakin mau logout?🥺',
+                                  descTextStyle: TextStyle(fontSize: 18),
+                                  btnCancelOnPress: () {},
+                                  btnCancelText: 'Batal',
+                                  btnOkOnPress: _logout,
+                                  btnOkText: 'Ya',
+                                ).show();
+                              },
+                              icon: Icon(Icons.logout_outlined),
                               color: Colors.white,
+                              iconSize: 20,
                             ),
                           ),
                         ],
